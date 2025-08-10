@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3 uid="uid://6p2xnck0qbse"]
+
+[ext_resource type="Script" uid="uid://dvynro8wsw2q6" path="res://Scripts/button_blue.gd" id="1_ibk8d"]
+[ext_resource type="Texture2D" uid="uid://b0aqxb7da3tjs" path="res://Assets/Sprites/button_blue_pressed.png" id="1_ygaih"]
+[ext_resource type="Texture2D" uid="uid://c1wrx1j5fyabm" path="res://Assets/Sprites/button_button.png" id="2_ibk8d"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lvvrp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ygaih")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ibk8d")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u8mcq"]
+height = 210.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0mqkn"]
+radius = 19.0
+height = 120.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lvvrp"]
+size = Vector2(97.5, 20)
+
+[node name="Blue Button" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_ibk8d")
+
+[node name="blue_sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(8, -152)
+sprite_frames = SubResource("SpriteFrames_lvvrp")
+animation = &"up"
+
+[node name="collider_base" type="CollisionShape2D" parent="."]
+position = Vector2(5, -40)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_u8mcq")
+
+[node name="blue_collider_top" type="CollisionShape2D" parent="."]
+position = Vector2(1, -128)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_0mqkn")
+
+[node name="blue checker" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="blue checker"]
+position = Vector2(1, -175)
+shape = SubResource("RectangleShape2D_lvvrp")
+
+[connection signal="body_entered" from="blue checker" to="." method="_on_blue_checker_body_entered"]
+[connection signal="body_exited" from="blue checker" to="." method="_on_blue_checker_body_exited"]
