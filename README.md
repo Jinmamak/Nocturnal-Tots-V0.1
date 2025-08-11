@@ -1,4 +1,4 @@
-# Nocturnal Tots (Godot Visual Novel Hybrid
+# Nocturnal Tots - Godot Visual Novel Hybrid
 
 **Version:** 0.1 (Prototype Build)
 
